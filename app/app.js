@@ -6,16 +6,9 @@
 
     window.app = {
 
-        getDescendingNumbers: function (start, stop)
+        exchangeMoney: function (money)
         {
-            if (typeof start !== 'number' || typeof stop !== 'number' || start < stop) {
-                return false;
-            }
-            var descendingNumbers = start;
-            for (var i = start - 1; i >= stop; i--) {
-                descendingNumbers = descendingNumbers + ' ' + i;
-            }
-            return descendingNumbers;
+
         }
     };
 

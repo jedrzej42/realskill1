@@ -4,36 +4,36 @@ describe('app', function ()
 
     var answer = window.app;
 
-    describe('getDescendingNumbers', function ()
+    describe('exchangeMoney', function ()
     {
-        it('should return string with numbers separated by spaces', function ()
+        it('should return false if money is not a number', function ()
         {
-            expect(answer.getDescendingNumbers(15, 1)).toEqual('15 14 13 12 11 10 9 8 7 6 5 4 3 2 1');
+            expect(answer.exchangeMoney('four')).toBeFalsy();
         });
 
-        it('should return false if start greater than stop', function ()
+        it('should return false if money is less than 0', function ()
         {
-            expect(answer.getDescendingNumbers(1, 15)).toBeFalsy();
+            expect(answer.exchangeMoney(-2)).toBeFalsy();
         });
 
-        it('should return false if start is string', function ()
+        it('should return empty array if money is 0', function ()
         {
-            expect(answer.getDescendingNumbers('asa', 1)).toBeFalsy();
-        });
-        it('should return false if stop is string', function ()
-        {
-            expect(answer.getDescendingNumbers(1, 'asa')).toBeFalsy();
+            expect(answer.exchangeMoney(0)).toEqual([]);
         });
 
-        it('should return false if start is number but string', function ()
+        it('should return only 5 value coins', function ()
         {
-            expect(answer.getDescendingNumbers('5', 1)).toBeFalsy();
+           expect(answer.exchangeMoney(15)).toEqual([5,5,5]);
         });
 
-        it('should return false if start is NaN', function ()
+        it('should return only 2 value coins', function ()
         {
-            expect(answer.getDescendingNumbers(NaN, 1)).toBeFalsy();
+            expect(answer.exchangeMoney(4)).toEqual([2,2]);
         });
-
+        it('should return good exchange for money', function ()
+        {
+            expect(answer.exchangeMoney(13)).toEqual([5,5,2,1]);
+            expect(answer.exchangeMoney(9)).toEqual([5,2,2]);
+        });
     });
 });

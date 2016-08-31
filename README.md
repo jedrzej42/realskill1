@@ -1,7 +1,14 @@
-# Pure JavaScript scaffolding for RealSkill
+# Money exchange
 
-You can quickly create JavaScript tasks by cloning the scaffolding repo. 
-You don't have to bother with karma/coverage/reporters/gruntfile/npm configuration.
+## Goals
+
+Your task is to write function that exchange money to smaller values.
+
+### exchangeMoney(money)
+
+Return array with coins values after exchanging `money` to `5`, `2` or `1` values.
+
+`money` value of `18` should return `[5,5,5,2,1]` 
 
 ## Setup
 
