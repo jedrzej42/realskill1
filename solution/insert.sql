@@ -1,0 +1,4 @@
+--| id    | first_name | last_name |    job    |  country  | age |
+--|-------|------------|-----------|-----------|-----------|-----|
+--|   1   |   John     |  Smith    | Driver    | Poland    |  44 |
+--|   2   |   Alice    |  Wayne    | Marketing | Indonesia |  45 |

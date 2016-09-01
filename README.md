@@ -1,7 +1,38 @@
-# PostgreSQL scaffolding for RealSkill
+# PostgreSQL simple exercise
 
-You can quickly create PostgreSQL tasks by cloning this repository. 
-The scaffolding provides PostgreSQL driver configuration, mocha tests setup and simple SQL test scenarios runner.
+## Goals
+
+This exercise have 4 simple PostgreSQL tasks.
+
+### schema.sql
+
+Create table 
+
+| column     |      type      |
+|------------|----------------|
+| id         | auto_increment |
+| first_name | varchar(50)    |
+| last_name  | varchar(50)    |
+| job        | varchar(50)    |
+| country    | varchar(50)    |
+| age        | Int            |
+
+### insert.sql
+
+Insert values into user
+
+| id    | first_name | last_name |    job    |  country  | age |
+|-------|------------|-----------|-----------|-----------|-----|
+|   1   |   John     |  Smith    | Driver    | Poland    |  44 |
+|   2   |   Alice    |  Wayne    | Marketing | Indonesia |  45 |
+
+### search.sql
+
+Search `first_name`, `last_name` and `age` of users who are underage. 
+
+### unemployed.sql
+
+Count every unemployed user.
 
 ## Setup
 
@@ -11,64 +42,6 @@ The scaffolding provides PostgreSQL driver configuration, mocha tests setup and 
 npm install
 ```
 
-## PgSQL test runner
-
-### Scenarios format
-
-Provided runner parses plain text file as below (for syntax highlighting the sql format is recommended).
- 
-```
---statement="../solution/schema.sql" Seed schema
---statement insert valid row
-INSERT INTO users(email) VALUES ('example@email.com'),('another@email.com');
---statement
-SELECT * FROM users;
---expect 2 users
-id,email
-1,example@email.com
-2,another@email.com
---statement="select_all_users.sql" Select all users
---expect="expected_users.csv" 2 users
---statement insert incorrect row
-INSERT INTO users(email) VALUES (1,2,3,4)
---expect syntax error
-name,code
-error,SQL-42601
-```
-
-That would be translated into following scenarios:
-
-```
-Evaluate scenario
-    Statement Seed schema
-      ✓ should be successfull
-    Statement insert valid row
-      ✓ should be successfull
-    Statement SELECT * FROM users;
-      ✓ should return 2 users
-    Statement Select all users
-      ✓ should return 2 users
-    Statement insert incorrect row
-      ! error: INSERT has more expressions than target columns
-        code: 42601
-        routine: transformInsertRow 
-      ✓ should return syntax error
-```
-
-Scenarios are composed of 2 types of instructions: `statement` and `expect`. Each instruction symbol must be prepended with `--`. Last executed `statement` 
-result is stored and compared with subsequent `expect`. `Statement` and `expected` content can be provided inline (in subsequent lines, before next instruction
- symbol) as well as extracted into separate file (see example above). You can put some inline comment after `--statement` or `--expect` statement if 
- instruction doesn't point to external file. Those comments will be displayed with tests results.
- `Expect` must be a valid CSV data set, with column names in first row. You can expect data set response as well as SQL error. To test error you need to 
- specify 2x2 csv table as follows:
- 
-| name    | code           |
-|---------|----------------|
-| error   | SQL-errorCode  |
-
-Code value must be [valid PostgreSQL error code](http://www.postgresql.org/docs/9.4/static/errcodes-appendix.html#ERRCODES-TABLE) prefixed with `SQL-` string.
-Please place your test scenario in `test/scenario.sql` (you can find example scenario file there).
- 
 ### Database connection
 
 You are required to provide valid connection to working PostgreSQL instance. This scaffolding is tested on PostgreSQL 9.4, however it should work on other 
